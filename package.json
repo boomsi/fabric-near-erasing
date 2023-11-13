@@ -2,7 +2,7 @@
   "name": "fabric-near-erasing",
   "description": "Object model for HTML5 canvas, and SVG-to-canvas parser. Backed by jsdom and node-canvas.",
   "homepage": "http://fabricjs.com/",
-  "version": "5.3.0-types6",
+  "version": "5.3.0-types10",
   "author": "Juriy Zaytsev <kangax@gmail.com>",
   "contributors": [
     {
@@ -88,6 +88,8 @@
     "node": ">=14.0.0"
   },
   "main": "./dist/fabric.js",
-  "dependencies": {},
+  "dependencies": {
+    "uglifyjs": "^2.4.11"
+  },
   "types": "./index.d.ts"
 }

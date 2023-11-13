@@ -471,6 +471,9 @@
       }
 
       var img = fabric.util.createImage();
+      var _this = this
+      var failedUrl = fabric.Object.prototype.loadImageFiledSrc
+      var connectStr = '?source='
 
       /** @ignore */
       var onLoadCallback = function () {
@@ -482,8 +485,18 @@
       /** @ignore */
       img.onerror = function() {
         fabric.log('Error loading ' + img.src);
-        callback && callback.call(context, null, true);
-        img = img.onload = img.onerror = null;
+
+        if (failedUrl) {
+          _this.loadImage(
+            failedUrl + connectStr + encodeURIComponent(url),
+            callback, 
+            context, 
+            crossOrigin
+          )
+        } else {
+          callback && callback.call(context, null, true);
+          img = img.onload = img.onerror = null;
+        }
       };
 
       // data-urls appear to be buggy with crossOrigin
@@ -505,7 +518,17 @@
         fabric.util.loadImageInDom(img, onLoadCallback);
       }
 
-      img.src = url;
+      // img.src = url;
+      if (url.indexOf(failedUrl) === -1) {
+        img.src = url;
+      } else {
+        var urlArr = url.split(connectStr)
+        if (urlArr[1]) {
+          img.src = decodeURIComponent(urlArr[1])
+        } else {
+          img.src = url
+        }
+      }
     },
 
     /**

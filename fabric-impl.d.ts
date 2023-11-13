@@ -3102,6 +3102,10 @@ interface IObjectOptions {
      * The canvas the object belongs to
      */
     canvas?: Canvas | undefined;
+    /**
+     * Image load failed slot image
+     */
+    loadImageFiledSrc?: string | undefined;
 }
 export interface Object extends IObservable<Object>, IObjectOptions, IObjectAnimation<Object> {}
 export class Object {

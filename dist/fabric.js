@@ -1094,6 +1094,9 @@ fabric.CommonMethods = {
       }
 
       var img = fabric.util.createImage();
+      var _this = this
+      var failedUrl = fabric.Object.prototype.loadImageFiledSrc
+      var connectStr = '?source='
 
       /** @ignore */
       var onLoadCallback = function () {
@@ -1105,8 +1108,18 @@ fabric.CommonMethods = {
       /** @ignore */
       img.onerror = function() {
         fabric.log('Error loading ' + img.src);
-        callback && callback.call(context, null, true);
-        img = img.onload = img.onerror = null;
+
+        if (failedUrl) {
+          _this.loadImage(
+            failedUrl + connectStr + encodeURIComponent(url),
+            callback, 
+            context, 
+            crossOrigin
+          )
+        } else {
+          callback && callback.call(context, null, true);
+          img = img.onload = img.onerror = null;
+        }
       };
 
       // data-urls appear to be buggy with crossOrigin
@@ -1128,7 +1141,17 @@ fabric.CommonMethods = {
         fabric.util.loadImageInDom(img, onLoadCallback);
       }
 
-      img.src = url;
+      // img.src = url;
+      if (url.indexOf(failedUrl) === -1) {
+        img.src = url;
+      } else {
+        var urlArr = url.split(connectStr)
+        if (urlArr[1]) {
+          img.src = decodeURIComponent(urlArr[1])
+        } else {
+          img.src = url
+        }
+      }
     },
 
     /**
@@ -15286,8 +15309,10 @@ fabric.util.object.extend(fabric.StaticCanvas.prototype, /** @lends fabric.Stati
             version:                  fabric.version,
             originX:                  this.originX,
             originY:                  this.originY,
-            left:                     toFixed(this.left, NUM_FRACTION_DIGITS),
-            top:                      toFixed(this.top, NUM_FRACTION_DIGITS),
+            // left:                     toFixed(this.left, NUM_FRACTION_DIGITS),
+            // top:                      toFixed(this.top, NUM_FRACTION_DIGITS),
+            left:                     this.left,
+            top:                      this.top,
             width:                    toFixed(this.width, NUM_FRACTION_DIGITS),
             height:                   toFixed(this.height, NUM_FRACTION_DIGITS),
             fill:                     (this.fill && this.fill.toObject) ? this.fill.toObject() : this.fill,
@@ -15299,9 +15324,12 @@ fabric.util.object.extend(fabric.StaticCanvas.prototype, /** @lends fabric.Stati
             strokeLineJoin:           this.strokeLineJoin,
             strokeUniform:            this.strokeUniform,
             strokeMiterLimit:         toFixed(this.strokeMiterLimit, NUM_FRACTION_DIGITS),
-            scaleX:                   toFixed(this.scaleX, NUM_FRACTION_DIGITS),
-            scaleY:                   toFixed(this.scaleY, NUM_FRACTION_DIGITS),
-            angle:                    toFixed(this.angle, NUM_FRACTION_DIGITS),
+            // scaleX:                   toFixed(this.scaleX, NUM_FRACTION_DIGITS),
+            // scaleY:                   toFixed(this.scaleY, NUM_FRACTION_DIGITS),
+            scaleX:                   this.scaleX,
+            scaleY:                   this.scaleY,
+            // angle:                    toFixed(this.angle, NUM_FRACTION_DIGITS),
+            angle:                    this.angle,
             flipX:                    this.flipX,
             flipY:                    this.flipY,
             opacity:                  toFixed(this.opacity, NUM_FRACTION_DIGITS),
