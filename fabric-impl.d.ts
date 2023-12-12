@@ -3106,6 +3106,10 @@ interface IObjectOptions {
      * Image load failed slot image
      */
     loadImageFiledSrc?: string | undefined;
+    /**
+     * Move the current selected element
+     */
+    moveWithOverlapping?: boolean | undefined;
 }
 export interface Object extends IObservable<Object>, IObjectOptions, IObjectAnimation<Object> {}
 export class Object {
