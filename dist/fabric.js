@@ -12474,7 +12474,7 @@ fabric.PatternBrush = fabric.util.createClass(fabric.PencilBrush, /** @lends fab
       // Do not check for currently grouped objects, since we check the parent group itself.
       // until we call this function specifically to search inside the activeGroup
 
-      if (this.moveWithOverlapping) {
+      if (fabric.Object.prototype.moveWithOverlapping) {
         var active = this.getActiveObject();
         if (active) {
           var pointerToUse = active.group ?
