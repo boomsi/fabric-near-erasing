@@ -1,7 +1,7 @@
 /* build: `node build.js modules=ALL exclude=gestures,accessors requirejs minifier=uglifyjs` */
 /*! Fabric.js Copyright 2008-2015, Printio (Juriy Zaytsev, Maxim Chernyak) */
 
-var fabric = fabric || { version: '5.3.0' };
+var fabric = fabric || { version: '5.3.5' };
 if (typeof exports !== 'undefined') {
   exports.fabric = fabric;
 }
@@ -7524,6 +7524,9 @@ fabric.ElementsParser = function(elements, callback, options, reviver, parsingOp
         multiplier = isTransformCentered(transform) ? 2 : 1,
         oldWidth = target.width,
         newWidth = Math.abs(localPoint.x * multiplier / target.scaleX) - strokePadding;
+    if (target.autoWrapAfterChangeWidth) {
+      target.splitByGrapheme = true
+    }
     target.set('width', Math.max(newWidth, 0));
     return oldWidth !== newWidth;
   }
@@ -30732,6 +30735,13 @@ fabric.util.object.extend(fabric.IText.prototype, /** @lends fabric.IText.protot
      * @since 2.6.0
      */
     splitByGrapheme: false,
+
+    /**
+     * Once changed width, all the inputs that follow will be auto wrapped. like keynote.
+     * @type Boolean
+     * @since 5.3.6
+     */
+    autoWrapAfterChangeWidth: false,
 
     /**
      * Unlike superclass's version of this function, Textbox does not update
