@@ -79,6 +79,13 @@
     splitByGrapheme: false,
 
     /**
+     * Once changed width, all the inputs that follow will be auto wrapped. like keynote.
+     * @type Boolean
+     * @since 5.3.6
+     */
+    autoWrapAfterChangeWidth: false,
+
+    /**
      * Unlike superclass's version of this function, Textbox does not update
      * its width.
      * @private

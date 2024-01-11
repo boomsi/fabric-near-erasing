@@ -5103,6 +5103,10 @@ interface ITextboxOptions extends ITextOptions {
      */
     splitByGrapheme?: boolean | undefined;
     /**
+     * Once changed width, all the inputs that follow will be auto wrapped. like keynote.
+     */
+    autoWrapAfterChangeWidth?: boolean | undefined;
+    /**
      * Is the text wrapping
      */
     isWrapping?: boolean | undefined;

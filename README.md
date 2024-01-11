@@ -8,7 +8,7 @@
 
 It includes both, eliminating the need to install @types/fabric. Additionally, within the build package, apart from fabric, it also incorporates an `erasing`.
 
-## Addition
+## Difference
 
 1. Add next dir from `Fabric.js@v6.0.0-rc.0` for fix image clip [error](https://github.com/fabricjs/fabric.js/issues/8517). 
 
@@ -45,4 +45,16 @@ fabric.Object.prototype.loadImageFiledSrc = '/xxx.png'
 
 // how to use
 fabric.Object.prototype.moveWithOverlapping = true
+```
+
+4. Add new Textbox wrap mode, it will auto wrap when change width, like keynote.
+
+```js
+// src/controls.actions.js:692-694
+
+// how to use 
+new fabric.Textbox('text', {
+    // ...
+    autoWrapAfterChangeWidth: true
+})
 ```

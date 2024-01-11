@@ -689,6 +689,9 @@
         multiplier = isTransformCentered(transform) ? 2 : 1,
         oldWidth = target.width,
         newWidth = Math.abs(localPoint.x * multiplier / target.scaleX) - strokePadding;
+    if (target.autoWrapAfterChangeWidth) {
+      target.splitByGrapheme = true
+    }
     target.set('width', Math.max(newWidth, 0));
     return oldWidth !== newWidth;
   }
