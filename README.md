@@ -8,6 +8,8 @@
 
 Fixed some bugs and added some features. See [Difference](#Difference).
 
+**This project is only a modified version of 'Fabric.js', mainly to fix some bugs and add some features, if the official version of the new version, it is recommended to directly use the official version.**
+
 ## Difference
 
 1. Add next dir from `Fabric.js@v6.0.0-rc.0` for fix image clip [error](https://github.com/fabricjs/fabric.js/issues/8517).
