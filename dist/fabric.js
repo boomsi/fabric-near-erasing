@@ -12922,6 +12922,29 @@ fabric.PatternBrush = fabric.util.createClass(fabric.PencilBrush, /** @lends fab
     },
 
     /**
+     * If you get the information of an element in an activeSelection, 
+     * you will get the information relative to the activeSelection. 
+     * You can get the information of the element relative to the canvas through this method
+     */
+    getOriginalObjectInfo: function(instance) {
+      var info = {}
+      var activeSelectionInfo = this._realizeGroupTransformOnObject(instance);
+      info = {
+        left: instance.left,
+        top: instance.top,
+        angle: instance.angle,
+        scaleX: instance.scaleX,
+        scaleY: instance.scaleY,
+        flipX: instance.flipX,
+        flipY: instance.flipY,
+        skewX: instance.skewX,
+        skewY: instance.skewY,
+      }
+      this._unwindGroupTransformOnObject(instance, activeSelectionInfo);
+      return info
+    },
+
+    /**
      * @private
      */
     _toObject: function(instance, methodName, propertiesToInclude) {

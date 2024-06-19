@@ -2064,6 +2064,23 @@ export class Canvas {
      */
     drawControls(ctx: CanvasRenderingContext2D): void;
     /**
+     * If you get the information of an element in an activeSelection, 
+     * you will get the information relative to the activeSelection. 
+     * You can get the information of the element relative to the canvas through this method.
+     */
+    getOriginalObjectInfo(instance: fabric.Object): Pick<
+        fabric.Object,
+        | 'left'
+        | 'top'
+        | 'scaleX'
+        | 'scaleY'
+        | 'angle'
+        | 'skewX'
+        | 'skewY'
+        | 'flipX'
+        | 'flipY'
+    >
+    /**
      * @return {Boolean} true if the scaling occurred
      */
     _setObjectScale(

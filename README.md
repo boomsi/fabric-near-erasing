@@ -65,3 +65,9 @@ new fabric.Textbox("text", {
 // src/shapes/object.class.js:843-880
 
 ```
+6. If you get the information of an element in an activeSelection, you will get the information relative to the activeSelection. You can get the information of the element relative to the canvas through this method.
+
+```js
+  // src/canvas.class.js:1260
+  const originalInfo = canvas.getOriginalObjectInfo(canvas.getActiveObjects()[0])
+```
